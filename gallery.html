@@ -257,6 +257,32 @@
             lightbox.classList.remove('active');
         }
     </script>
+    <script>
+        function toggleMusic() {
+            const audio = document.getElementById('bgAudio');
+            const statusText = document.getElementById('musicStatus');
+            const icon = document.getElementById('musicIcon');
+            const playerCard = document.getElementById('musicPlayer');
+
+            if (audio.paused) {
+                audio.play()
+                    .then(() => {
+                        statusText.textContent = "Playing";
+                        icon.textContent = "⏸️";
+                        playerCard.style.transform = "scale(1.03)";
+                    })
+                    .catch(error => {
+                        console.log("Playback blocked:", error);
+                    });
+            } else {
+                audio.pause();
+                statusText.textContent = "Play Music";
+                icon.textContent = "🎵";
+                playerCard.style.transform = "scale(1)";
+            }
+        }
+    </script>
+    
 
 </body>
 </html>
