@@ -239,6 +239,12 @@
         <img id="lightboxImage" class="lightbox-img" src="" alt="Enlarged View">
         <div id="lightboxCaption" class="lightbox-caption"></div>
     </div>
+    <!-- 🎵 Floating Music Player Widget -->
+    <div id="musicPlayer" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: #ffffff; border: 1px solid #eae5d9; padding: 10px 15px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; font-family: 'Georgia', serif; cursor: pointer; transition: transform 0.2s ease;" onclick="toggleMusic()">
+        <span id="musicIcon" style="font-size: 1.2rem; color: #8a6d3b;">🎵</span>
+        <span id="musicStatus" style="font-size: 0.85rem; color: #2c2c2c; font-weight: bold; letter-spacing: 0.5px;">Play Music</span>
+        <audio id="bgAudio" src="music.mp3" loop></audio>
+    </div>
 
     <!-- Lightbox Logic Script -->
     <script>
@@ -257,6 +263,7 @@
             lightbox.classList.remove('active');
         }
     </script>
+    <!-- Music Control Logic Script -->
     <script>
         function toggleMusic() {
             const audio = document.getElementById('bgAudio');
