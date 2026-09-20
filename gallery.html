@@ -94,13 +94,10 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             cursor: pointer;
-            
-            /* Apply the animation */
             animation: fadeInUp 0.6s ease forwards;
             opacity: 0; 
         }
 
-        /* Staggered loading effect for each photo card */
         .gallery-item:nth-child(1) { animation-delay: 0.1s; }
         .gallery-item:nth-child(2) { animation-delay: 0.25s; }
         .gallery-item:nth-child(3) { animation-delay: 0.4s; }
@@ -197,31 +194,31 @@
                 <img src="couple-photo.png" alt="Nikitarya - Nikita Naik and Yogesh Arya permanently one">
                 <div class="caption">Permanently One</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('couple-photo.png', 'Permanently One')">
-                <img src="nikita.jpg" alt="Nikitarya - Nikita Naik and Yogesh Arya permanently one">
-                <div class="caption">Structural Engineer</div>
-            </div>
             
-            <div class="gallery-item" onclick="openLightbox('couple-photo.png', 'Permanently One')">
-                <img src="arya.jpg" alt="Nikitarya - Nikita Naik and Yogesh Arya permanently one">
-                <div class="caption">Mechanical Engineer</div>
-            </div>
             <!-- Photo 2 -->
             <div class="gallery-item" onclick="openLightbox('photo2.png', 'Beautiful Memories')">
-                <img src="design.png" alt="Nikitarya memory photo">
-                <div class="caption">orthographic</div>
+                <img src="nikita.jpg" alt="Nikitarya memory photo">
+                <div class="caption">Structural Engineer</div>
             </div>
             
             <!-- Photo 3 -->
             <div class="gallery-item" onclick="openLightbox('photo3.png', 'Together Always')">
-                <img src="80s.png" alt="Nikitarya celebration photo">
-                <div class="caption">In 80s</div>
+                <img src="arya.jpg" alt="Nikitarya celebration photo">
+                <div class="caption">Mechanical Engineer</div>
             </div>
 
             <!-- Photo 4 -->
             <div class="gallery-item" onclick="openLightbox('photo4.png', 'Cherished Moments')">
+                <img src="design.png" alt="Nikitarya special moment">
+                <div class="caption">Orthographic</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('photo4.png', 'Cherished Moments')">
+                <img src="80s.png" alt="Nikitarya special moment">
+                <div class="caption">in the 80s</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('photo4.png', 'Cherished Moments')">
                 <img src="nikitarya.png" alt="Nikitarya special moment">
-                <div class="caption">Real one</div>
+                <div class="caption">Real</div>
             </div>
 
         </div>
@@ -239,6 +236,7 @@
         <img id="lightboxImage" class="lightbox-img" src="" alt="Enlarged View">
         <div id="lightboxCaption" class="lightbox-caption"></div>
     </div>
+
     <!-- 🎵 Floating Music Player Widget -->
     <div id="musicPlayer" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: #ffffff; border: 1px solid #eae5d9; padding: 10px 15px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; font-family: 'Georgia', serif; cursor: pointer; transition: transform 0.2s ease;" onclick="toggleMusic()">
         <span id="musicIcon" style="font-size: 1.2rem; color: #8a6d3b;">🎵</span>
@@ -246,39 +244,39 @@
         <audio id="bgAudio" src="music.mp3" loop></audio>
     </div>
 
-    <!-- Lightbox Logic Script -->
+    <!-- Scripts Logic -->
     <script>
-        function openLightbox(src, captionText) {
-            const lightbox = document.getElementById('lightboxOverlay');
-            const lightboxImg = document.getElementById('lightboxImage');
-            const lightboxCap = document.getElementById('lightboxCaption');
+        // Lightbox Functions
+        function openLightbox(imgSrc, captionText) {
+            var overlay = document.getElementById('lightboxOverlay');
+            var img = document.getElementById('lightboxImage');
+            var cap = document.getElementById('lightboxCaption');
             
-            lightboxImg.src = src;
-            lightboxCap.textContent = captionText;
-            lightbox.classList.add('active');
+            img.src = imgSrc;
+            cap.textContent = captionText;
+            overlay.classList.add('active');
         }
 
         function closeLightbox() {
-            const lightbox = document.getElementById('lightboxOverlay');
-            lightbox.classList.remove('active');
+            var overlay = document.getElementById('lightboxOverlay');
+            overlay.classList.remove('active');
         }
-    </script>
-    <!-- Music Control Logic Script -->
-    <script>
+
+        // Music Function
         function toggleMusic() {
-            const audio = document.getElementById('bgAudio');
-            const statusText = document.getElementById('musicStatus');
-            const icon = document.getElementById('musicIcon');
-            const playerCard = document.getElementById('musicPlayer');
+            var audio = document.getElementById('bgAudio');
+            var statusText = document.getElementById('musicStatus');
+            var icon = document.getElementById('musicIcon');
+            var playerCard = document.getElementById('musicPlayer');
 
             if (audio.paused) {
                 audio.play()
-                    .then(() => {
+                    .then(function() {
                         statusText.textContent = "Playing";
                         icon.textContent = "⏸️";
                         playerCard.style.transform = "scale(1.03)";
                     })
-                    .catch(error => {
+                    .catch(function(error) {
                         console.log("Playback blocked:", error);
                     });
             } else {
@@ -289,8 +287,8 @@
             }
         }
     </script>
-    
 
 </body>
 </html>
+
 
