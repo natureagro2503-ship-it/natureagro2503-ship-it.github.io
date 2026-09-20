@@ -80,6 +80,70 @@
             color: #999;
             letter-spacing: 0.5px;
         }
+            /* 📐 Engineering Blueprint Theme Toggle Styles */
+        .blueprint-mode {
+            background-color: #0b1d3a !important;
+            background-image: radial-gradient(#1e3d6b 1px, transparent 0), radial-gradient(#1e3d6b 1px, transparent 0) !important;
+            background-size: 20px 20px !important;
+            background-position: 0 0, 10px 10px !important;
+            color: #4ef2d2 !important;
+        }
+        .blueprint-mode .container {
+            background: rgba(11, 29, 58, 0.9) !important;
+            border: 2px dashed #4ef2d2 !important;
+            box-shadow: 0 0 25px rgba(78, 242, 210, 0.2) !important;
+            color: #4ef2d2 !important;
+        }
+        .blueprint-mode h1, .blueprint-mode .subtitle, .blueprint-mode .emphasis, .blueprint-mode .spec-title {
+            color: #4ef2d2 !important;
+        }
+        .blueprint-mode .divider {
+            background-color: #4ef2d2 !important;
+        }
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        .spec-box {
+            border: 1px solid #eae5d9;
+            padding: 15px;
+            border-radius: 8px;
+            background: var(--bg-color);
+        }
+        .blueprint-mode .spec-box {
+            border: 1px dashed #4ef2d2 !important;
+            background: rgba(30, 61, 107, 0.3) !important;
+        }
+        .spec-title {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .toggle-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .blueprint-mode .toggle-btn {
+            background: #4ef2d2 !important;
+            color: #0b1d3a !important;
+            box-shadow: 0 0 15px #4ef2d2;
+        }
+
     </style>
     <script type="application/ld+json">
 {
@@ -129,7 +193,8 @@
     <div class="container">
         <!-- Replace 'couple-photo.jpg' with your actual uploaded image file name -->
         <img src="couple-photo.png" alt="Nikitarya - Nikita Naik and Yogesh Arya permanently one" class="couple-photo">
-        
+                <button class="toggle-btn" onclick="activateBlueprint()">📐 Activate System Blueprint</button>
+
         <h1>Nikitarya</h1>
         <div class="subtitle">The Permanent Truth</div>
         
@@ -142,6 +207,31 @@
         <p class="truth-statement">
             It is the absolute and permanent truth that they are permanently one. Together, they are known as <span class="emphasis">Nikitarya</span>.
         </p>
+                <div class="divider"></div>
+        <div style="font-style: italic; margin-bottom: 10px; font-weight: bold;">System Architecture Dashboard</div>
+        
+        <div class="spec-grid">
+            <!-- Structural Engineering Node -->
+            <div class="spec-box">
+                <div class="spec-title">🏗️ Structural Parameters</div>
+                <div style="font-size: 0.9rem;">
+                    • <strong>Foundation:</strong> Built on ultimate, unwavering truth.<br>
+                    • <strong>Load-Bearing Capacity:</strong> Infinite. Designed to absorb and deflect external societal pressures effortlessly.<br>
+                    • <strong>Elasticity Matrix:</strong> Optimized to weather decades of environmental shifts without deflection.
+                </div>
+            </div>
+            
+            <!-- Mechanical Engineering Node -->
+            <div class="spec-box">
+                <div class="spec-title">⚙️ Mechanical Parameters</div>
+                <div style="font-size: 0.9rem;">
+                    • <strong>Kinetic Synchronicity:</strong> Two distinct bodies operating under perfect mechanical advantage as a unified engine.<br>
+                    • <strong>Friction Coefficient:</strong> µ = 0.00. Self-lubricating harmony.<br>
+                    • <strong>Thermodynamic Stability:</strong> Closed-loop energy matrix. Zero efficiency dissipation over generations.
+                </div>
+            </div>
+        </div>
+
         
         <div class="divider"></div>
         
@@ -153,6 +243,17 @@
             Established in Truth • Permanently One
         </footer>
     </div>
+    <script>
+        function activateBlueprint() {
+            document.body.classList.toggle('blueprint-mode');
+            const btn = document.querySelector('.toggle-btn');
+            if (document.body.classList.contains('blueprint-mode')) {
+                btn.textContent = "✨ Restore Elegant View";
+            } else {
+                btn.textContent = "📐 Activate System Blueprint";
+            }
+        }
+    </script>
 
 </body>
 </html>
