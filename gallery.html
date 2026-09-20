@@ -284,6 +284,7 @@
             overlay.classList.remove('active');
         }
 
+                // Music Function (Enhanced Browser Bypass)
         function toggleMusic() {
             var audio = document.getElementById('bgAudio');
             var statusText = document.getElementById('musicStatus');
@@ -291,12 +292,23 @@
             var playerCard = document.getElementById('musicPlayer');
 
             if (audio.paused) {
+                // Force state update immediately to override browser delay
+                statusText.textContent = "LOADING...";
+                
                 audio.play()
                     .then(function() {
                         statusText.textContent = "AUDIO: ACTIVE";
                         icon.textContent = "⏹️";
-                        
-                           } else {
+                        playerCard.style.transform = "scale(1.03)";
+                        playerCard.style.borderColor = "#ffffff";
+                    })
+                    .catch(function(error) {
+                        console.log("Playback blocked by browser security:", error);
+                        statusText.textContent = "CLICK TO UNMUTE";
+                        // If blocked, try forcing play on next user interaction
+                        audio.muted = false;
+                    });
+            } else {
                 audio.pause();
                 statusText.textContent = "AUDIO: OFF";
                 icon.textContent = "🔊";
@@ -304,7 +316,7 @@
                 playerCard.style.borderColor = "var(--accent-cyan)";
             }
         }
-    </script> <!-- Closes the music script block -->
+
 
 </body> <!-- Closes the webpage content zone -->
 </html> <!-- Marks the absolute end of the document -->
