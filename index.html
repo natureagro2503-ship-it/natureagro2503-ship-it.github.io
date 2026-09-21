@@ -281,4 +281,72 @@
         </div>
 
         <div class="nav-container">
+            <a href="gallery.html" class="btn-link">Access Core Vault ➔</a>
+        </div>
+<footer>
+            NIKITAR_CORE_SYS // UNIVERSAL TIMELINE REGISTER LOCK // DECAY INDEX: UNMEASURABLE
+        </footer>
+    </div> <!-- Closes the main container card -->
 
+    <!-- 🎵 Floating Music Player Widget (Brings back your audio!) -->
+    <div id="musicPlayer" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: var(--panel-bg); border: 1px solid var(--accent-cyan); padding: 10px 20px; border-radius: 2px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); display: flex; align-items: center; gap: 10px; font-family: 'Courier New', monospace; cursor: pointer; transition: transform 0.2s ease;" onclick="toggleMusic()">
+        <span id="musicIcon" style="font-size: 1.1rem; color: var(--accent-cyan);">🔊</span>
+        <span id="musicStatus" style="font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px;">AUDIO: OFF</span>
+        <audio id="bgAudio" src="music.mp3" loop></audio>
+    </div>
+
+    <!-- Live Calculation Processing & Audio Control Scripts -->
+    <script>
+        function runUniversalProcessor() {
+            var now = new Date();
+            document.getElementById('live-epoch').textContent = now.getFullYear() + " CE // " + now.toISOString().slice(11, 19);
+
+            var baseLoad = 872.40;
+            var loadFluctuation = (Math.sin(now.getTime() / 2500) * 3.12).toFixed(2);
+            var currentLoad = (parseFloat(baseLoad) + parseFloat(loadFluctuation)).toFixed(2);
+            document.getElementById('structural-load').textContent = currentLoad + " kN";
+
+            var baseVel = 2450.00;
+            var velFluctuation = (Math.cos(now.getTime() / 1800) * 5.85).toFixed(2);
+            var currentVel = (parseFloat(baseVel) + parseFloat(velFluctuation)).toFixed(2);
+            document.getElementById('mechanical-velocity').textContent = currentVel + " rad/s";
+
+            var stabilityNoise = (100 - (Math.random() * 0.00001)).toFixed(4);
+            document.getElementById('stability-index').textContent = stabilityNoise + "%";
+        }
+
+        setInterval(runUniversalProcessor, 1000);
+        runUniversalProcessor();
+
+        // Music Control Function
+        function toggleMusic() {
+            var audio = document.getElementById('bgAudio');
+            var statusText = document.getElementById('musicStatus');
+            var icon = document.getElementById('musicIcon');
+            var playerCard = document.getElementById('musicPlayer');
+
+            if (audio.paused) {
+                statusText.textContent = "LOADING...";
+                audio.play()
+                    .then(function() {
+                        statusText.textContent = "AUDIO: ACTIVE";
+                        icon.textContent = "⏹️";
+                        playerCard.style.transform = "scale(1.03)";
+                        playerCard.style.borderColor = "#ffffff";
+                    })
+                    .catch(function(error) {
+                        console.log("Playback blocked:", error);
+                        statusText.textContent = "CLICK TO UNMUTE";
+                    });
+            } else {
+                audio.pause();
+                statusText.textContent = "AUDIO: OFF";
+                icon.textContent = "🔊";
+                playerCard.style.transform = "scale(1)";
+                playerCard.style.borderColor = "var(--accent-cyan)";
+            }
+        }
+    </script>
+
+</body>
+</html>
