@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikitarya — Kinetic Photo Matrix</title>
+    <style>
+        :root {
+            --bg-dark: #03070d;
+            --accent-cyan: #00ffcc;
+            --accent-blue: #14437b;
+            --text-light: #d2e6ff;
+            --panel-bg: rgba(6, 17, 33, 0.9);
+        }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-dark);
+            background-image: 
+                linear-gradient(rgba(20, 67, 123, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 67, 123, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            background: rgba(4, 9, 18, 0.95);
+            border-bottom: 1px solid var(--accent-cyan);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        .top-bar h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            color: var(--accent-cyan);
+        }
+        .sys-mode {
+            font-size: 0.75rem;
+            color: #79a6db;
+        }
+
+        /* 🎞️ Kinetic Conveyor Stage */
+        .stage-view {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* The container holding the two identical blocks side-by-side */
+        .conveyor-track {
+            display: flex;
+            width: max-content;
+            animation: matrixDrift 30s linear infinite; /* Adjust speed here */
+        }
+        .conveyor-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Sub-groups inside the track to keep elements horizontally aligned */
+        .track-group {
+            display: flex;
+            gap: 25px;
+            padding: 0 12.5px;
+        }
+
+        .photo-module {
+            width: 320px;
+            height: 420px;
+            background: var(--panel-bg);
+            border: 1px solid var(--accent-blue);
+            border-radius: 2px;
+            padding: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .photo-module:hover {
+            transform: scale(1.04) translateY(-10px);
+            border-color: var(--accent-cyan);
+        }
+        .image-container {
+            width: 100%;
+            height: 320px;
+            background: #040912;
+            border: 1px dashed rgba(20, 67, 123, 0.5);
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-meta {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            border-top: 1px solid rgba(20, 67, 123, 0.4);
+            padding-top: 10px;
+        }
+        .meta-title {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .meta-coord {
+            color: #79a6db;
+        }
+
+        /* Perfect mathematical loop translation */
+        @keyframes matrixDrift {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); } /* Moves exactly half the full track width */
+        }
+
+        .control-dock {
+            background: rgba(4, 9, 18, 0.95);
+            border-top: 1px solid rgba(20, 67, 123, 0.6);
+            padding: 20px;
+            text-align: center;
+            z-index: 10;
+        }
+        .btn-link {
+            display: inline-block;
+            color: var(--bg-dark);
+            background-color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 30px;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .hud-audio {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(20, 67, 123, 0.2);
+            border: 1px solid var(--accent-blue);
+            padding: 6px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>
+            <h2>NIKITAR_VAULT</h2>
+            <div class="sys-mode">DATA LOG STREAM // KINETIC MATRIX ONLINE</div>
+        </div>
+        
+        <div class="hud-audio" onclick="toggleGalleryAudio()">
+            <span id="audioHudIcon" style="color: var(--accent-cyan);">🔊</span>
+            <span id="audioHudStatus" style="font-size: 0.75rem; letter-spacing: 1px;">SYSTEM AUDIO ACTIVE</span>
+            <audio id="galleryAudio" src="music.mp3" loop autoplay></audio>
+        </div>
+    </div>
+
+    <!-- 🎞️ MAIN MOTION STREAM CONTAINER -->
+    <div class="stage-view">
+        <div class="conveyor-track">
+            
+            <!-- ================================================================= -->
+            <!-- 📦 GROUP A: ORIGINAL TRACK SET -->
+            <!-- ================================================================= -->
+            <div class="track-group">
+                <div class="photo-module">
+                    <div class="image-container"><img src="nikita.jpg" alt="Photo 1"></div>
+                    <div class="photo-meta"><div class="meta-title">[Nikita]</div><div class="meta-coord">MATRIX TRACK 1</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="arya.jpg" alt="Photo 2"></div>
+                    <div class="photo-meta"><div class="meta-title">[Arya]</div><div class="meta-coord">MATRIX TRACK 2</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="nikitarya.png" alt="Photo 3"></div>
+                    <div class="photo-meta"><div class="meta-title">[One]</div><div class="meta-coord">MATRIX TRACK 3</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="design.png" alt="Photo 4"></div>
+                    <div class="photo-meta"><div class="meta-title">[orthographic]</div><div class="meta-coord">MATRIX TRACK 4</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="80s.png" alt="Photo 5"></div>
+                    <div class="photo-meta"><div class="meta-title">[in the 80s]</div><div class="meta-coord">MATRIX TRACK 5</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="structural.png" alt="Photo 6"></div>
+                    <div class="photo-meta"><div class="meta-title">[Structural Engineer]</div><div class="meta-coord">MATRIX TRACK 6</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="northeasttribal.png" alt="Photo 7"></div>
+                    <div class="photo-meta"><div class="meta-title">[northeasttribal]</div><div class="meta-coord">MATRIX TRACK 7</div></div>
+                </div>
+            </div>
+
+            <!-- ================================================================= -->
+            <!-- 📦 GROUP B: EXACT MIRROR DUPLICATE (Ensures No Glitching) -->
+            <!-- ================================================================= -->
+            <div class="track-group" aria-hidden="true">
+                <div class="photo-module">
+                    <div class="image-container"><img src="photo1.jpg" alt="Photo 1"></div>
+                    <div class="photo-meta"><div class="meta-title">[LOG // 001]</div><div class="meta-coord">MATRIX TRACK 1</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="photo2.jpg" alt="Photo 2"></div>
+                    <div class="photo-meta"><div class="meta-title">[LOG // 002]</div><div class="meta-coord">MATRIX TRACK 2</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="photo3.jpg" alt="Photo 3"></div>
+                    <div class="photo-meta"><div class="meta-title">[LOG // 003]</div><div class="meta-coord">MATRIX TRACK 3</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="photo4.jpg" alt="Photo 4"></div>
+                    <div class="photo-meta"><div class="meta-title">[LOG // 004]</div><div class="meta-coord">MATRIX TRACK 4</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="photo5.jpg" alt="Photo 5"></div>
+                    <div class="photo-meta"><div class="meta-title">[LOG // 005]</div><div class="meta-coord">MATRIX TRACK 5</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="photo6.jpg" alt="Photo 6"></div>
+                    <div class="photo-meta"><div class="meta-title">[LOG // 006]</div><div class="meta-coord">MATRIX TRACK 6</div></div>
+                </div>
+                <div class="photo-module">
+                    <div class="image-container"><img src="photo7.jpg" alt="Photo 7"></div>
