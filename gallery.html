@@ -236,3 +236,45 @@
                 </div>
                 <div class="photo-module">
                     <div class="image-container"><img src="photo7.jpg" alt="Photo 7"></div>
+                     <!-- Bottom Navigation Dock (Command Matrix Link) -->
+    <div class="control-dock">
+        <a href="index.html" class="btn-link">➔ Return to Command Matrix</a>
+    </div>
+
+    <!-- Audio Engine Initialization & Interactive Controls -->
+    <script>
+        // Attempts to safely bypass browser autoplay barriers upon document loading
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var audio = document.getElementById('galleryAudio');
+            if (audio) {
+                audio.volume = 0.70; // Sets baseline system volume to 70%
+                audio.play().catch(function(err) {
+                    console.log("System Autoplay blocked. User input signature required.");
+                    document.getElementById('audioHudStatus').textContent = "CLICK TO INITIALIZE AUDIO";
+                    document.getElementById('audioHudIcon').textContent = "🔇";
+                });
+            }
+        });
+
+        // Toggles audio streaming states between play and pause
+        function toggleGalleryAudio() {
+            var audio = document.getElementById('galleryAudio');
+            var status = document.getElementById('audioHudStatus');
+            var icon = document.getElementById('audioHudIcon');
+            
+            if (audio) {
+                if (audio.paused) {
+                    audio.play();
+                    status.textContent = "SYSTEM AUDIO ACTIVE";
+                    icon.textContent = "🔊";
+                } else {
+                    audio.pause();
+                    status.textContent = "AUDIO MUTED";
+                    icon.textContent = "🔇";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+   
